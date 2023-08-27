@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "V0KTET+R/hbo7gKGH9p3nHj5R8C5Ugk5TGCjKNmf1tU=",
+  "Source": "mytask.api",
+  "BasePath": "_content/mytask.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
