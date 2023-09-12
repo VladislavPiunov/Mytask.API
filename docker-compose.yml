@@ -17,6 +17,8 @@ services:
       - "8082:443"
     networks:
       - auth-network
+    depends_on: 
+      - mongodb
     volumes:
       - ~/.aspnet/https:/https:ro
   
@@ -50,6 +52,21 @@ services:
       - postgres
     links:
       - "postgres:postgres"
+    networks:
+      - auth-network
+
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_INITDB_DATABASE=mytask
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
     networks:
       - auth-network
 
