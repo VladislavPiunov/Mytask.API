@@ -34,22 +34,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/", async (MongoClient client) =>     // получаем MongoClient через DI
-{
-    var db = client.GetDatabase("mytask");    // обращаемся к базе данных
-    var collection = db.GetCollection<BsonDocument>("users"); // получаем коллекцию users
-    // для теста добавляем начальные данные, если коллекция пуста
-    if (await collection.CountDocumentsAsync("{}") == 0)
-    {
-        await collection.InsertManyAsync(new List<BsonDocument>
-        {
-            new BsonDocument{ { "Name", "Tom" },{"Age", 22}},
-            new BsonDocument{ { "Name", "Bob" },{"Age", 42}}
-        });
-    }
-    var users =  await collection.Find("{}").ToListAsync();
-    db.DropCollection("users");
-    return users.ToJson();  // отправляем клиенту все документы из коллекции
-});
-
 app.Run();
