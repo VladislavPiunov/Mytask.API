@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcMytask";
+
+import "google/protobuf/timestamp.proto";
+
+package MytaskApi;
+
+service Mytask {
+  
+}
+
+message BoardRequest {
+  string id = 1;
+  string name = 2;
+  string ownerid = 3;
+  repeated string stages = 4;
+  repeated string users = 5;
+}
+
+message StageRequest {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+}
+
+message  TaskRequest {
+  string id = 1;
+  string name = 2;
+  string boardid = 3;
+  string stageid = 4;
+  string description = 5;
+  google.protobuf.Timestamp deadline = 6;
+  string executor = 7;
+}

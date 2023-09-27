@@ -1,4 +1,4 @@
-namespace mytask.api.Services;
+namespace Mytask.API.Services;
 
 public interface IIdentityService
 {

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace mytask.api.Services;
+namespace Mytask.API.Services;
 
 public class IdentityService: IIdentityService
 {

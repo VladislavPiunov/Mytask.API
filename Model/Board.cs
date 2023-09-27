@@ -1,21 +1,24 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace mytask.api.Model;
+namespace Mytask.API.Model;
 
 public class Board
 {
+    [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; private set; } = "";
-    public string Name { get; set; }
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string OwnerId { get; private set; }
-    public List<string> Users { get; set; } = new();
+    public string Id { get; set; } = "";
 
-    public Board(string name, string ownerId, List<string> users)
+    public string Name { get; set; } = "Myboard";
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string OwnerId { get; set; }
+
+    public List<string> Stages { get; set; } = new();
+    public List<string> Users { get; set; } = new();
+    
+    public Board(string ownerId)
     {
-        Name = name;
         OwnerId = ownerId;
-        Users = users;
     }
 }
