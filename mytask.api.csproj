@@ -13,7 +13,10 @@
         <PackageReference Include="Keycloak.AuthServices.Authentication" Version="1.5.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9"/>
         <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+        <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.2.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+
+
 
 
 

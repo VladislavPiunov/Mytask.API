@@ -3,7 +3,7 @@ using Mytask.API.Model;
 
 namespace Mytask.API.Repositories;
 
-public class StageRepository
+public class StageRepository: IStageRepository
 {
     private readonly ILogger<StageRepository> _logger;
     private readonly MongoClient _mongoClient;

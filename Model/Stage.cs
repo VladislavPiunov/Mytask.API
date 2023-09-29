@@ -8,7 +8,6 @@ public class Stage
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; } = "";
-    [BsonRepresentation(BsonType.ObjectId)]
     public string Name { get; set; }
     public string Color { get; set; }
 

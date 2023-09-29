@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mytask.API.Model;
@@ -33,7 +34,6 @@ public class MytaskController : ControllerBase
     public async Task<ActionResult<List<Board>>> GetBoardsAsync()
     {
         var userId = _identityService.GetUserIdentity();
-
         var boards = await _boardRepository.GetBoardsAsync(userId);
 
         if (boards.Count == 0)
@@ -70,11 +70,15 @@ public class MytaskController : ControllerBase
     public async Task<ActionResult<bool>> DeleteBoardAsync(string id) 
         => await _boardRepository.DeleteBoardAsync(id);
 
-    [Route("stage")]
+    [Route("stage/{boardId}")]
     [HttpGet]
     [Authorize]
-    public async Task<ActionResult<List<Stage>>> GetStagesAsync([FromForm] string boardStages)
-        => await _stageRepository.GetStagesAsync(boardStages.Split(",").ToList());
+    public async Task<ActionResult<List<Stage>>> GetStagesAsync(string boardId)
+    {
+        var boardStages = _boardRepository.GetBoardByIdAsync(boardId).Result.Stages;
+
+        return await _stageRepository.GetStagesAsync(boardStages);
+    }
 
     [Route("stage")]
     [HttpPost]

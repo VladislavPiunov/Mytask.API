@@ -67,8 +67,12 @@ services:
       - type: bind
         source: ./data
         target: /data/db
-    networks:
-      - auth-network
+        
+  config-server:
+    image: steeltoeoss/config-server
+    ports:
+      - '8888:8888'
+    command: --spring.cloud.config.server.git.uri=https://github.com/VladislavPiunov/my-config.git --spring.cloud.config.server.git.default-label=main
 
 networks:
   auth-network:

@@ -10,8 +10,7 @@ public class Board
     public string Id { get; set; } = "";
 
     public string Name { get; set; } = "Myboard";
-
-    [BsonRepresentation(BsonType.ObjectId)]
+    
     public string OwnerId { get; set; }
 
     public List<string> Stages { get; set; } = new();

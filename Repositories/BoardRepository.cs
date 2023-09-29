@@ -1,9 +1,10 @@
 using MongoDB.Driver;
 using Mytask.API.Model;
+using Task = Mytask.API.Model.Task;
 
 namespace Mytask.API.Repositories;
 
-public class BoardRepository
+public class BoardRepository: IBoardRepository
 {
     private readonly ILogger<BoardRepository> _logger;
     private readonly MongoClient _mongoClient;
@@ -19,6 +20,9 @@ public class BoardRepository
     public async Task<List<Board>> GetBoardsAsync(string ownerId)
         => await _database.GetCollection<Board>("boards")
             .Find(b => b.OwnerId == ownerId || b.Users.Contains(ownerId)).ToListAsync();
+
+    public async Task<Board> GetBoardByIdAsync(string boardId)
+        => await _database.GetCollection<Board>("boards").Find(b => b.Id == boardId).SingleOrDefaultAsync();
     
     public async Task<Board> CreateBoardAsync(Board board)
     {

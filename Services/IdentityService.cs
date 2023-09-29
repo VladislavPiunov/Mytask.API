@@ -2,17 +2,17 @@ using System.Security.Claims;
 
 namespace Mytask.API.Services;
 
-public class IdentityService: IIdentityService
+public class IdentityService : IIdentityService
 {
-    private ClaimsPrincipal _principal;
+    private IHttpContextAccessor _context;
 
-    public IdentityService(ClaimsPrincipal principal)
+    public IdentityService(IHttpContextAccessor context)
     {
-        _principal = principal ?? throw new ArgumentNullException(nameof(principal));
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
     public string GetUserIdentity()
     {
-        return _principal.FindFirstValue(ClaimTypes.NameIdentifier);
+        return _context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
     }
 }
