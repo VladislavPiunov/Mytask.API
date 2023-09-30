@@ -49,13 +49,15 @@ public class BoardController : ControllerBase
 
     [HttpPut]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Board>> UpdateBoardAsync([FromBody] Board board)
-     => await _boardRepository.UpdateBoardAsync(board);
+     => Ok(await _boardRepository.UpdateBoardAsync(board));
 
 
     [Route("{id}")]
     [HttpDelete]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<bool>> DeleteBoardAsync(string id) 
-        => await _boardRepository.DeleteBoardAsync(id);
+        => Ok(await _boardRepository.DeleteBoardAsync(id));
 }   

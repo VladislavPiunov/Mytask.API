@@ -26,22 +26,25 @@ public class StageController : ControllerBase
     {
         var boardStages = _boardRepository.GetBoardByIdAsync(boardId).Result.Stages;
 
-        return await _stageRepository.GetStagesAsync(boardStages);
+        return Ok(await _stageRepository.GetStagesAsync(boardStages));
     }
 
     [HttpPost]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Stage>> CreateStageAsync([FromBody] Stage stage)
-        => await _stageRepository.CreateStageAsync(stage);
+        => Ok(await _stageRepository.CreateStageAsync(stage));
 
     [HttpPut]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Stage>> UpdateStageAsync([FromBody] Stage stage)
-        => await _stageRepository.UpdateStageAsync(stage);
+        => Ok(await _stageRepository.UpdateStageAsync(stage));
 
     [HttpDelete]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<bool>> DeleteStageAsync(string id)
-        => await _stageRepository.DeleteStageAsync(id);
+        => Ok(await _stageRepository.DeleteStageAsync(id));
     
 }   

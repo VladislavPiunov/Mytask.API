@@ -20,22 +20,26 @@ public class TaskController : ControllerBase
     [Route("{boardId}")]
     [HttpGet]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<Task>>> GetTasksAsync(string boardId)
-        => await _taskRepository.GetTasksAsync(boardId);
+        => Ok(await _taskRepository.GetTasksAsync(boardId));
 
     [HttpPost]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Task>> CreateTaskAsync([FromBody] Task task)
-        => await _taskRepository.CreateTaskAsync(task);
+        => Ok(await _taskRepository.CreateTaskAsync(task));
 
     [HttpPut]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<Task>> UpdateTaskAsync([FromBody] Task task)
-        => await _taskRepository.UpdateTaskAsync(task);
+        => Ok(await _taskRepository.UpdateTaskAsync(task));
 
     [Route("{id}")]
     [HttpDelete]
     [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<bool>> DeleteTaskAsync(string id)
-        => await _taskRepository.DeleteTaskAsync(id);
+        => Ok(await _taskRepository.DeleteTaskAsync(id));
 }   
