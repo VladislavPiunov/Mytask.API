@@ -5,7 +5,7 @@ using Mytask.API.Model;
 namespace Mytask.API.Controllers;
 
 [ApiController]
-[Route("api")]
+[Route("api/stage")]
 public class StageController : ControllerBase
 {
     private readonly IBoardRepository _boardRepository;
@@ -19,7 +19,7 @@ public class StageController : ControllerBase
         _stageRepository = stageRepository;
     }
 
-    [Route("stage/{boardId}")]
+    [Route("{boardId}")]
     [HttpGet]
     [Authorize]
     public async Task<ActionResult<List<Stage>>> GetStagesAsync(string boardId)
@@ -29,19 +29,16 @@ public class StageController : ControllerBase
         return await _stageRepository.GetStagesAsync(boardStages);
     }
 
-    [Route("stage")]
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Stage>> CreateStageAsync([FromBody] Stage stage)
         => await _stageRepository.CreateStageAsync(stage);
 
-    [Route("stage")]
     [HttpPut]
     [Authorize]
     public async Task<ActionResult<Stage>> UpdateStageAsync([FromBody] Stage stage)
         => await _stageRepository.UpdateStageAsync(stage);
 
-    [Route("stage/{id}")]
     [HttpDelete]
     [Authorize]
     public async Task<ActionResult<bool>> DeleteStageAsync(string id)

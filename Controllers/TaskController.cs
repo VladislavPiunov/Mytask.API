@@ -6,7 +6,7 @@ using Task = Mytask.API.Model.Task;
 namespace Mytask.API.Controllers;
 
 [ApiController]
-[Route("api")]
+[Route("api/task")]
 public class TaskController : ControllerBase
 {
     private readonly ITaskRepository _taskRepository;
@@ -17,25 +17,23 @@ public class TaskController : ControllerBase
         _taskRepository = taskRepository;
     }
 
-    [Route("task/{boardId}")]
+    [Route("{boardId}")]
     [HttpGet]
     [Authorize]
     public async Task<ActionResult<List<Task>>> GetTasksAsync(string boardId)
         => await _taskRepository.GetTasksAsync(boardId);
 
-    [Route("task")]
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<Task>> CreateTaskAsync([FromBody] Task task)
         => await _taskRepository.CreateTaskAsync(task);
 
-    [Route("task")]
     [HttpPut]
     [Authorize]
     public async Task<ActionResult<Task>> UpdateTaskAsync([FromBody] Task task)
         => await _taskRepository.UpdateTaskAsync(task);
 
-    [Route("task/{id}")]
+    [Route("{id}")]
     [HttpDelete]
     [Authorize]
     public async Task<ActionResult<bool>> DeleteTaskAsync(string id)
